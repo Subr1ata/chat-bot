@@ -1,8 +1,11 @@
-![alt text](https://i.postimg.cc/TwC605t6/Screenshot-from-2024-05-23-17-41-11.png)
 
-# Getting Started with Create React App
+https://github.com/Subr1ata/chat-bot/assets/41237115/cc2cc961-638c-4cd4-958d-dc648a2bb983
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+# Technologies Used
+
+### `React.js`
+### `Tailwind.css`
 
 ## Available Scripts
 
