@@ -1,4 +1,4 @@
-![alt text](https://postimg.cc/0MMF2jgW)
+![alt text](https://i.postimg.cc/TwC605t6/Screenshot-from-2024-05-23-17-41-11.png)
 
 # Getting Started with Create React App
 
