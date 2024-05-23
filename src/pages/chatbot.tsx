@@ -93,10 +93,9 @@ function ChatBot() {
                     <br />
                     <span className="text-3xl font-bold">How can we help?</span>
                     <div
-                      className="flex flex-row shadow-lg border-gray-200 rounded-lg p-4 border-2 cursor-pointer justify-between items-center relative"
+                      className="flex flex-row shadow-lg border-gray-200 rounded-lg p-4 border-2 cursor-pointer justify-between items-center relative mb-5"
                       onClick={() => setIsAskQuestion(true)}
                     >
-                      {/* <div className=""> */}
                       <div className="flex flex-col">
                         <span className="font-bold text-sm hover:text-green-800">
                           Ask a question
@@ -216,7 +215,9 @@ function ChatBot() {
 
               <div
                 className={`border-t p-4 md:p-5 border-gray-200 rounded-b dark:border-gray-600 ${
-                  isAskQuestion ? "" : "flex items-center justify-center gap-32"
+                  isAskQuestion
+                    ? ""
+                    : "flex items-center justify-center gap-32 shadow-lg bg-white rounded-b-xl"
                 }`}
               >
                 {isAskQuestion ? (
