@@ -2,26 +2,34 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import ChatBot from "./pages/chatbot";
+import {
+  BrowserRouter,
+  // RouterProvider,
+  // createBrowserRouter,
+} from "react-router-dom";
+// import ChatBot from "./pages/chatbot";
+import App from "./App";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <ChatBot />,
-    errorElement: (
-      <>Not Found Sorry we are trying hard to resolve this issue !!</>
-    ),
-  },
-]);
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <ChatBot />,
+//     errorElement: (
+//       <>Not Found Sorry we are trying hard to resolve this issue !!</>
+//     ),
+//   },
+// ]);
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <BrowserRouter>
+      {/* <RouterProvider router={router} /> */}
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
 
