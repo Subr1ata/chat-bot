@@ -22,15 +22,15 @@ function ChatBot() {
   const [currentTab, setCurrentTab] = useState<"home" | "messages">("home");
   const [isLoading, setIsLoading] = useState(false);
   const [isAskQuestion, setIsAskQuestion] = useState(false);
-  const [textMessages, setTextMessages] = useState<string[]>([]);
+  const [chats, setChats] = useState<string[]>([]);
   const [currentText, setCurrentText] = useState("");
 
-  console.log("textMessages::", textMessages);
+  console.log("textMessages::", chats);
 
   const fetchChats = async () => {
-    const data = await axios.get(`${APIEndPoints.backendUrl}/api/chat`);
+    const { data } = await axios.get(`${APIEndPoints.backendUrl}/api/chat`);
 
-    console.log("data::", data.data);
+    setChats(data);
   };
 
   useEffect(() => {
@@ -93,16 +93,31 @@ function ChatBot() {
                     <br />
                     <span className="text-3xl font-bold">How can we help?</span>
                     <div
-                      className="flex flex-col shadow-lg border-gray-200 rounded-lg p-4 border-2 cursor-pointer"
+                      className="flex flex-row shadow-lg border-gray-200 rounded-lg p-4 border-2 cursor-pointer justify-between items-center relative"
                       onClick={() => setIsAskQuestion(true)}
                     >
-                      <span className="font-bold text-sm hover:text-green-800">
-                        Ask a question
-                      </span>
-                      {/* <br /> */}
-                      <span className="text-sm text-gray-700">
-                        AI agent and team can help
-                      </span>
+                      {/* <div className=""> */}
+                      <div className="flex flex-col">
+                        <span className="font-bold text-sm hover:text-green-800">
+                          Ask a question
+                        </span>
+                        <span className="text-sm text-gray-700">
+                          AI agent and team can help
+                        </span>
+                      </div>
+                      <div className="flex flex-row items-center">
+                        <img
+                          src="https://static.intercomassets.com/assets/default-avatars/fin/128-6a5eabbb84cc2b038b2afc6698ca0a974faf7adc9ea9f0fb3c3e78ac12543bc5.png"
+                          alt="logo"
+                          className="absolute w-8 h-8 z-10 right-7"
+                        />
+                        <img
+                          src="https://static.intercomassets.com/avatars/5133131/square_128/benjamin_profile_picture-1667926369.jpeg"
+                          alt="logo-1"
+                          className="absolute w-7 h-7 rounded-full z-5 right-2"
+                        />
+                      </div>
+                      {/* </div> */}
                     </div>
                   </div>{" "}
                 </>
@@ -220,7 +235,7 @@ function ChatBot() {
                         <IoMdSend
                           className="cursor-pointer w-5 h-5 hover:text-opacity-50 text-green-800"
                           onClick={() =>
-                            setTextMessages((prev) => [...prev, currentText])
+                            setChats((prev) => [...prev, currentText])
                           }
                         />
                       ) : (
