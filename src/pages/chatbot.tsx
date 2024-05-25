@@ -70,8 +70,9 @@ function ChatBot() {
                   <div className="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600">
                     <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                       <img
-                        src="https://flowbite.com/docs/images/logo.svg"
+                        src="https://static.intercomassets.com/assets/default-avatars/fin/128-6a5eabbb84cc2b038b2afc6698ca0a974faf7adc9ea9f0fb3c3e78ac12543bc5.png"
                         alt="icon"
+                        className="w-8 h-8 rounded-full"
                       />
                     </h3>
                     <button
@@ -86,12 +87,16 @@ function ChatBot() {
                       />
                     </button>
                   </div>
-                  <div className="p-8 space-y-4 mb-32 mt-10 md:mb-32 md:mt-10 w-80">
-                    <span className="text-3xl font-bold text-gray-500">
-                      Hi there 👋
-                    </span>
-                    <br />
-                    <span className="text-3xl font-bold">How can we help?</span>
+                  <div className="p-5 space-y-4 mb-32 mt-10 md:mb-32 md:mt-10 w-80">
+                    <div className="mx-3">
+                      <span className="text-3xl font-bold text-gray-500">
+                        Hi there 👋
+                      </span>
+                      <br />
+                      <span className="text-3xl font-bold">
+                        How can we help?
+                      </span>
+                    </div>
                     <div
                       className="flex flex-row shadow-lg border-gray-200 rounded-lg p-4 border-2 cursor-pointer justify-between items-center relative mb-5"
                       onClick={() => setIsAskQuestion(true)}
@@ -127,9 +132,9 @@ function ChatBot() {
                       Messages
                     </span>
                   </div>
-                  <div className="flex flex-col items-center p-4 space-y-4 mb-32 mt-32">
+                  <div className="flex flex-col items-center p-4 space-y-4 mb-32 mt-16">
                     {isLoading ? (
-                      <CgSpinnerAlt className="animate-spin w-8 h-8" />
+                      <CgSpinnerAlt className="animate-spin w-8 h-8 mt-36" />
                     ) : (
                       <>
                         <span className="text-3xl font-bold">
