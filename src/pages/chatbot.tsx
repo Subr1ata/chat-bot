@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { TbMessage } from "react-icons/tb";
-import { IoIosArrowDown, IoMdSend } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 import { RiHomeSmile2Fill, RiHomeSmile2Line } from "react-icons/ri";
 import {
   BiMessageSquareDetail,
@@ -10,14 +10,11 @@ import {
 import { Button } from "../components/ui/button";
 import { PiSealQuestionFill } from "react-icons/pi";
 import { CgSpinnerAlt } from "react-icons/cg";
-import { GoPaperclip } from "react-icons/go";
 
 import { MdKeyboardArrowLeft } from "react-icons/md";
-// import { Textarea } from "../components/ui/textarea";
 import axios from "axios";
 import { APIEndPoints } from "../APIEndPoints";
 import ChatInput from "../components/ChatInput";
-import Chat from "../components/Chat";
 import ChatMessages from "../components/ChatMessages";
 
 function ChatBot() {
@@ -26,7 +23,7 @@ function ChatBot() {
   const [isLoading, setIsLoading] = useState(false);
   const [isAskQuestion, setIsAskQuestion] = useState(false);
   const [chats, setChats] = useState<string[]>([]);
-  const [currentText, setCurrentText] = useState("");
+  // const [currentText, setCurrentText] = useState("");
 
   console.log("textMessages::", chats);
 
@@ -69,7 +66,7 @@ function ChatBot() {
             <div className="relative rounded-2xl shadow dark:bg-gray-700 bg-[#FBFBFF] mx-5">
               {/* <!-- Modal header --> */}
               {currentTab === "home" && !isAskQuestion ? (
-                <div className="p-6">
+                <div>
                   <div className="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600">
                     <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                       <img
@@ -89,7 +86,7 @@ function ChatBot() {
                       />
                     </button>
                   </div>
-                  <div className="p-5 space-y-4 mb-32 mt-10 md:mb-32 md:mt-10">
+                  <div className="p-8 space-y-4 mb-32 mt-10 md:mb-32 md:mt-10 w-80">
                     <span className="text-3xl font-bold text-gray-500">
                       Hi there 👋
                     </span>
@@ -124,15 +121,15 @@ function ChatBot() {
                   </div>{" "}
                 </div>
               ) : currentTab === "messages" && !isAskQuestion ? (
-                <div className="p-6">
-                  <div className="flex items-center justify-center p-4 md:p-5 rounded-t-xl dark:border-gray-600 bg-green-800">
+                <div className="w-80">
+                  <div className="flex items-center justify-center p-4 md:p-5 rounded-t-xl dark:border-gray-600 bg-green-800 ">
                     <span className="text-white font-bold text-xl">
                       Messages
                     </span>
                   </div>
-                  <div className="flex flex-col items-center p-0 space-y-4 mb-32 mt-32">
+                  <div className="flex flex-col items-center p-4 space-y-4 mb-32 mt-32">
                     {isLoading ? (
-                      <CgSpinnerAlt className="animate-spin my-[5rem] w-8 h-8" />
+                      <CgSpinnerAlt className="animate-spin w-8 h-8" />
                     ) : (
                       <>
                         <span className="text-3xl font-bold">
@@ -161,8 +158,6 @@ function ChatBot() {
                 </div>
               ) : (
                 <>
-                  {/* <div className="w-full"> */}
-                  {/* </div> */}
                   <div className="flex items-center rounded-t-xl dark:border-gray-600">
                     <div
                       className="justify-start hover:bg-green-200 rounded-xl m-4 p-2 cursor-pointer"
@@ -176,14 +171,14 @@ function ChatBot() {
                       </span>
                     </div>
                   </div>
-                  <div className="flex flex-col items-center space-y-1">
+                  <div className="flex flex-col items-center space-y-1 w-80">
                     {isLoading ? (
                       <CgSpinnerAlt className="animate-spin my-[5rem] w-8 h-8" />
                     ) : (
                       <>
-                        <div className="flex flex-col h-80 w-full">
+                        <div className="flex flex-col h-96 w-full">
                           <ChatMessages className="px-2 py-3 flex-1" />
-                          <ChatInput className="px-4" />
+                          <ChatInput className="px-7" />
                         </div>
                         {/* <span className="text-3xl font-bold">
                           <img
@@ -222,84 +217,65 @@ function ChatBot() {
                 </>
               )}
 
-              <div
-                className={`border-t p-4 md:p-5 border-gray-200 rounded-b dark:border-gray-600 ${
-                  isAskQuestion
-                    ? ""
-                    : "flex items-center justify-center gap-32 bg-white rounded-b-xl shadow"
-                }`}
-              >
-                {isAskQuestion ? (
-                  <>
-                    {/* <div className="flex justify-between items-end">
-                      <div className="w-full">
-                        <ChatInput className="border-none" />
+              {!isAskQuestion ? (
+                <div
+                  className={`p-3 rounded-b dark:border-gray-600 ${
+                    isAskQuestion
+                      ? ""
+                      : "border-gray-200 border-t flex items-center justify-center gap-32 bg-white rounded-b-xl shadow"
+                  }`}
+                >
+                  {!isAskQuestion && (
+                    <>
+                      <div
+                        data-modal-hide="default-modal"
+                        className="flex flex-col items-center justify-center content-center cursor-pointer"
+                        onClick={() => setCurrentTab("home")}
+                      >
+                        {currentTab === "home" ? (
+                          <RiHomeSmile2Fill className="text-green-800 rounded-lg w-7 h-7" />
+                        ) : (
+                          <RiHomeSmile2Line className="text-green-800 rounded-lg w-7 h-7" />
+                        )}
+                        <span
+                          className={`${
+                            currentTab === "home"
+                              ? "text-green-800 text-sm font-bold"
+                              : "text-green-800 text-sm"
+                          }`}
+                        >
+                          Home
+                        </span>
                       </div>
-                      {currentText.length ? (
-                        <IoMdSend
-                          className="cursor-pointer w-5 h-5 hover:text-opacity-50 text-green-800"
-                          onClick={() =>
-                            setChats((prev) => [...prev, currentText])
-                          }
-                        />
-                      ) : (
-                        <>
-                          <label htmlFor="file" className="cursor-pointer">
-                            <GoPaperclip />
-                            <input type="file" className="hidden" id="file" />
-                          </label>
-                        </>
-                      )}
-                    </div> */}
-                  </>
-                ) : (
-                  <>
-                    <div
-                      data-modal-hide="default-modal"
-                      className="flex flex-col items-center justify-center content-center cursor-pointer"
-                      onClick={() => setCurrentTab("home")}
-                    >
-                      {currentTab === "home" ? (
-                        <RiHomeSmile2Fill className="text-green-800 rounded-lg w-7 h-7" />
-                      ) : (
-                        <RiHomeSmile2Line className="text-green-800 rounded-lg w-7 h-7" />
-                      )}
-                      <span
-                        className={`${
-                          currentTab === "home"
-                            ? "text-green-800 text-sm font-bold"
-                            : "text-green-800 text-sm"
-                        }`}
+                      <div
+                        data-modal-hide="default-modal"
+                        className="flex flex-col items-center justify-center content-center cursor-pointer"
+                        onClick={() => {
+                          setCurrentTab("messages");
+                          setIsLoading(true);
+                        }}
                       >
-                        Home
-                      </span>
-                    </div>
-                    <div
-                      data-modal-hide="default-modal"
-                      className="flex flex-col items-center justify-center content-center cursor-pointer"
-                      onClick={() => {
-                        setCurrentTab("messages");
-                        setIsLoading(true);
-                      }}
-                    >
-                      {currentTab === "messages" ? (
-                        <BiSolidMessageSquareDetail className="text-green-800 rounded-lg w-7 h-7" />
-                      ) : (
-                        <BiMessageSquareDetail className="text-green-800 rounded-lg w-7 h-7" />
-                      )}
-                      <span
-                        className={`${
-                          currentTab === "messages"
-                            ? "text-green-800 text-sm font-bold"
-                            : "text-green-800 text-sm"
-                        }`}
-                      >
-                        Messages
-                      </span>
-                    </div>
-                  </>
-                )}
-              </div>
+                        {currentTab === "messages" ? (
+                          <BiSolidMessageSquareDetail className="text-green-800 rounded-lg w-7 h-7" />
+                        ) : (
+                          <BiMessageSquareDetail className="text-green-800 rounded-lg w-7 h-7" />
+                        )}
+                        <span
+                          className={`${
+                            currentTab === "messages"
+                              ? "text-green-800 text-sm font-bold"
+                              : "text-green-800 text-sm"
+                          }`}
+                        >
+                          Messages
+                        </span>
+                      </div>
+                    </>
+                  )}
+                </div>
+              ) : (
+                <div className="p-2 rounded-b-xl"></div>
+              )}
             </div>
           </div>
         </div>
