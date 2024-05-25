@@ -13,9 +13,12 @@ import { CgSpinnerAlt } from "react-icons/cg";
 import { GoPaperclip } from "react-icons/go";
 
 import { MdKeyboardArrowLeft } from "react-icons/md";
-import { Textarea } from "../components/ui/textarea";
+// import { Textarea } from "../components/ui/textarea";
 import axios from "axios";
 import { APIEndPoints } from "../APIEndPoints";
+import ChatInput from "../components/ChatInput";
+import Chat from "../components/Chat";
+import ChatMessages from "../components/ChatMessages";
 
 function ChatBot() {
   const [isOpenChatBot, setIsOpenChatBot] = useState(false);
@@ -61,12 +64,12 @@ function ChatBot() {
               : "hidden"
           } overflow-y-auto overflow-x-hidden z-50 justify-center items-center md:inset-0 max-h-full transform`}
         >
-          <div className="relative p-6 w-full max-w-md max-h-full mx-10">
+          <div className="relative mb-5">
             {/* <!-- Modal content --> */}
             <div className="relative rounded-2xl shadow dark:bg-gray-700 bg-[#FBFBFF] mx-5">
               {/* <!-- Modal header --> */}
               {currentTab === "home" && !isAskQuestion ? (
-                <>
+                <div className="p-6">
                   <div className="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600">
                     <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                       <img
@@ -119,9 +122,9 @@ function ChatBot() {
                       {/* </div> */}
                     </div>
                   </div>{" "}
-                </>
+                </div>
               ) : currentTab === "messages" && !isAskQuestion ? (
-                <>
+                <div className="p-6">
                   <div className="flex items-center justify-center p-4 md:p-5 rounded-t-xl dark:border-gray-600 bg-green-800">
                     <span className="text-white font-bold text-xl">
                       Messages
@@ -155,9 +158,11 @@ function ChatBot() {
                       </Button>
                     </div>
                   )}
-                </>
+                </div>
               ) : (
                 <>
+                  {/* <div className="w-full"> */}
+                  {/* </div> */}
                   <div className="flex items-center rounded-t-xl dark:border-gray-600">
                     <div
                       className="justify-start hover:bg-green-200 rounded-xl m-4 p-2 cursor-pointer"
@@ -171,12 +176,16 @@ function ChatBot() {
                       </span>
                     </div>
                   </div>
-                  <div className="flex flex-col items-center space-y-1 mb-60 mt-5 mx-10">
+                  <div className="flex flex-col items-center space-y-1">
                     {isLoading ? (
                       <CgSpinnerAlt className="animate-spin my-[5rem] w-8 h-8" />
                     ) : (
                       <>
-                        <span className="text-3xl font-bold">
+                        <div className="flex flex-col h-80 w-full">
+                          <ChatMessages className="px-2 py-3 flex-1" />
+                          <ChatInput className="px-4" />
+                        </div>
+                        {/* <span className="text-3xl font-bold">
                           <img
                             src="https://static.intercomassets.com/assets/default-avatars/fin/128-6a5eabbb84cc2b038b2afc6698ca0a974faf7adc9ea9f0fb3c3e78ac12543bc5.png"
                             alt="logo"
@@ -195,7 +204,7 @@ function ChatBot() {
                           <span className="text-sm text-slate-400 w-full">
                             Ask for the team if needed
                           </span>
-                        </div>
+                        </div> */}
                       </>
                     )}
                   </div>
@@ -217,20 +226,14 @@ function ChatBot() {
                 className={`border-t p-4 md:p-5 border-gray-200 rounded-b dark:border-gray-600 ${
                   isAskQuestion
                     ? ""
-                    : "flex items-center justify-center gap-32 shadow-lg bg-white rounded-b-xl"
+                    : "flex items-center justify-center gap-32 bg-white rounded-b-xl shadow"
                 }`}
               >
                 {isAskQuestion ? (
                   <>
-                    <div className="flex justify-between items-end">
-                      <div className="w-60">
-                        <Textarea
-                          onChange={(e) =>
-                            setCurrentText(e.currentTarget.value)
-                          }
-                          placeholder="Ask a question..."
-                          className="overflow-y-auto border-none outline-none focus:outline-none placeholder:text-slate-500"
-                        />
+                    {/* <div className="flex justify-between items-end">
+                      <div className="w-full">
+                        <ChatInput className="border-none" />
                       </div>
                       {currentText.length ? (
                         <IoMdSend
@@ -247,7 +250,7 @@ function ChatBot() {
                           </label>
                         </>
                       )}
-                    </div>
+                    </div> */}
                   </>
                 ) : (
                   <>
